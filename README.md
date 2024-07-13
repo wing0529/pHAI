@@ -1,3 +1,4 @@
-# pHAI
+# pHAI : 2024 광운대학교 마이캡스톤
 
-## code push 시 branch 생성해서 넣어주세요! 
+#### code push 시 branch 생성해서 넣어주세요! 
+#### 팀 별로 폴더를 활용해주세요!
