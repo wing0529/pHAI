@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/healthy_blue">
+
+    <!-- 상단바 -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Throat Care +\n우리의 안전한 목건강을 위해"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 설명 이미지 -->
+
+    <!-- 원인 설명 버튼 -->
+    <ImageView
+        android:id="@+id/descriptionImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="84dp"
+        android:contentDescription="@string/what_is"
+        android:scaleType="fitCenter"
+        android:src="@drawable/what_is"
+        android:background="@drawable/rounded_corners"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintWidth_percent="1.0" />
+
+
+    <Button
+        android:id="@+id/btnCause"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="원인 설명\nThe cause of reflux esophagitis"
+        android:background="@drawable/rounded_background"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/descriptionImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSymptoms"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <!-- 증상 설명 버튼 -->
+    <Button
+        android:id="@+id/btnSymptoms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="증상 설명\nSymptoms of reflux esophagitis"
+        android:background="@drawable/rounded_background"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/descriptionImageView"
+        app:layout_constraintStart_toEndOf="@+id/btnCause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <!-- 예방법 설명 버튼 -->
+    <Button
+        android:id="@+id/btnPrevention"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="예방법 설명\nHow to prevent reflux esophagitis"
+        android:background="@drawable/rounded_background"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnCause"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnProducts"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintVertical_bias="0.1"/>
+
+    <!-- 관리 제품 버튼 -->
+    <Button
+        android:id="@+id/btnProducts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="관리 제품\nThings to help prevent and treat reflux esophagitis"
+        android:background="@drawable/rounded_background"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnSymptoms"
+        app:layout_constraintStart_toEndOf="@+id/btnPrevention"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintVertical_bias="0.1"/>
+
+    <!-- 추가 버튼 -->
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:background="@drawable/rounded_background"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.95"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
