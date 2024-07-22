@@ -17,6 +17,7 @@
         android:textColor="@android:color/darker_gray" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
@@ -27,17 +28,43 @@
         android:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="16dp">
 
-        <ProgressBar
-            android:id="@+id/ProgressBar"
-            android:layout_width="200sp"
-            android:layout_height="200sp"
-            android:numStars="5"
-            android:progressBackgroundTint="@android:color/darker_gray"
-            android:progressTint="@color/healthy_green"
-            android:rating="0"
-            android:secondaryProgressTint="@color/healthy_green"
-            android:stepSize="1.0"
-            android:theme="@style/Widget.AppCompat.ProgressBar" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/ProgressBar"
+                android:layout_width="200sp"
+                android:layout_height="200sp"
+                android:layout_centerHorizontal="true"
+                android:progressBackgroundTint="@android:color/darker_gray"
+                android:progressTint="@color/healthy_green"
+                android:theme="@style/Widget.AppCompat.ProgressBar" />
+
+            <!-- 수치 단계 텍스트 -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ProgressBar"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+                android:text="상태: 보통"
+                android:textSize="18sp"
+                android:textColor="@android:color/darker_gray" />
+
+            <!-- 수치 텍스트 -->
+            <TextView
+                android:id="@+id/tvValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvStatus"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:text="수치: 50"
+                android:textSize="18sp"
+                android:textColor="@android:color/darker_gray" />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
