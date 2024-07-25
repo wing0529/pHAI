@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/healthy_blue"
     android:padding="16dp">
 
     <TextView
@@ -14,7 +14,7 @@
         android:text="역류성 식도염 수치 측정"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@android:color/darker_gray" />
+        android:textColor="@android:color/white" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -51,7 +51,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="상태: 보통"
                 android:textSize="18sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/healthy_blue" />
 
             <!-- 수치 텍스트 -->
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="수치: 50"
                 android:textSize="18sp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/healthy_blue" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -85,7 +85,7 @@
             android:background="@drawable/rounded_background_white"
             android:padding="16dp"
             android:text="다시 측정"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/healthy_blue"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -98,7 +98,7 @@
             android:background="@drawable/rounded_background_white"
             android:padding="16dp"
             android:text="홈 화면 이동"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/healthy_blue"
             android:textSize="18sp"
             android:textStyle="bold"/>
     </LinearLayout>
