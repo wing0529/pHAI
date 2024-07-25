@@ -1,8 +1,8 @@
 @file:Suppress("UNUSED_EXPRESSION")
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
 
 }
 
@@ -52,6 +52,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    //서버 라이브러리 추가
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation("net.sourceforge.jtds:jtds:1.3.1")
 
     // CameraX 라이브러리 추가
     implementation(libs.androidx.camera.core)
