@@ -9,6 +9,10 @@ __credits__ = ["Mahmoud Afifi"]
 
 from .deep_wb_blocks import *
 
+# U-Net 구현인듯
+# Decoder 부분은 up이 3개임
+# x5가 Bridge
+# awb, t, s를 cat으로 붙여서 반환
 
 class deepWBNet(nn.Module):
     def __init__(self):

@@ -19,7 +19,7 @@ def outOfGamutClipping(I):
     I[I < 0] = 0  # any pixel is below 0, clip it to 0
     return I
 
-
+# 이미지 픽셀을 polynomial로 변환
 def kernelP(I):
     """ Kernel function: kernel(r, g, b) -> (r,g,b,rg,rb,gb,r^2,g^2,b^2,rgb,1)
         Ref: Hong, et al., "A study of digital camera colorimetric characterization
@@ -29,7 +29,7 @@ def kernelP(I):
                           I[:, 2] * I[:, 2], I[:, 0] * I[:, 1] * I[:, 2],
                           np.repeat(1, np.shape(I)[0]))))
 
-
+# kernelP를 이용하여 다항식 mapping 계산
 def get_mapping_func(image1, image2):
     """ Computes the polynomial mapping """
     image1 = np.reshape(image1, [-1, 3])
@@ -37,7 +37,7 @@ def get_mapping_func(image1, image2):
     m = LinearRegression().fit(kernelP(image1), image2)
     return m
 
-
+# get_mapping_func에서 계산된 m을 이용하여 결과 이미지 생성
 def apply_mapping_func(image, m):
     """ Applies the polynomial mapping """
     sz = image.shape
@@ -46,7 +46,7 @@ def apply_mapping_func(image, m):
     result = np.reshape(result, [sz[0], sz[1], sz[2]])
     return result
 
-
+# T와 S를 이용하여 색온도 생성
 def colorTempInterpolate(I_T, I_S):
     """ Interpolates between tungsten and shade WB to produce Cloudy, Daylight, and Fluorescent WB """
     ColorTemperatures = {'T': 2850, 'F': 3800, 'D': 5500, 'C': 6500, 'S': 7500}
@@ -66,7 +66,7 @@ def colorTempInterpolate(I_T, I_S):
     I_C = g_C * I_T + (1 - g_C) * I_S
     return I_F, I_D, I_C
 
-
+# 얘는 목표 색온도
 def colorTempInterpolate_w_target(I_T, I_S, target_temp):
     """ Interpolates between tungsten and shade WB to produce target_temp WB """
     cct1 = 2850
@@ -78,7 +78,7 @@ def colorTempInterpolate_w_target(I_T, I_S, target_temp):
     g = (tempinv_target - cct2inv) / (cct1inv - cct2inv)
     return g * I_T + (1 - g) * I_S
 
-
+# numpy 배열에서 이미지로 변환
 def to_image(image):
     """ converts to PIL image """
     return Image.fromarray((image * 255).astype(np.uint8))
