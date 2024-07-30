@@ -18,6 +18,7 @@ from utilities.deepWB import deep_wb
 import arch.splitNetworks as splitter
 from arch import deep_wb_single_task
 
+# 폴더 내 파일 전부 돌리기
 
 def get_args():
     parser = argparse.ArgumentParser(description='Changing WB of an input image.')

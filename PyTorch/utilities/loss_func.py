@@ -9,7 +9,7 @@ __credits__ = ["Mahmoud Afifi"]
 
 import torch
 
-
+# L1 로스
 class mae_loss():
 
     @staticmethod
