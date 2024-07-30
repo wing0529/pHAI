@@ -76,7 +76,7 @@
         android:layout_marginBottom="32dp"
         android:weightSum="2">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnRetake"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnHome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
