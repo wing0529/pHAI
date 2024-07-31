@@ -1,0 +1,15 @@
+python (최신버전 상관 x)
+
+torch 2.3.1 (cuda는 알아서)
+torchvision 0.18.1
+
+나머지 버전은 상관 x
+
+Demo
+
+python demo_single_image.py --input "c:/aproject/DEEP WHITE BALANCE/Deep_White_Balance/example_images/00.JPG" --output_dir "c:/aproject/DEEP WHITE BALANCE/Deep_White_Balance/result_images" --show
+
+트레이닝 
+
+set CUDA_VISIBLE_DEVICES=0
+python train.py --training_dir ../dataset/ --fold 0 --epochs 500 --learning-rate-drop-period 50 --num_training_images 0
