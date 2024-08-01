@@ -57,6 +57,9 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("net.sourceforge.jtds:jtds:1.3.1")
 
+    //xml 카드뷰 실행
+    implementation ("androidx.cardview:cardview:1.0.0")
+
     // CameraX 라이브러리 추가
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.camera2)
@@ -67,4 +70,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
