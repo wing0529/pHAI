@@ -20,6 +20,8 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+import androidx.camera.view.PreviewView
+
 
 typealias LumaListener = (luma: Double) -> Unit
 
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
 
     private var imageCapture: ImageCapture? = null
+    private var isContinuousCapturing = false
 
     private var videoCapture: VideoCapture<Recorder>? = null
     private var recording: Recording? = null
@@ -49,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set up the listeners for take photo and video capture buttons
         viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
-        viewBinding.videoCaptureButton.setOnClickListener { captureVideo() }
+        viewBinding.continuousCaptureButton.setOnClickListener { toggleContinuousCapture() }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
@@ -111,6 +114,15 @@ class MainActivity : AppCompatActivity() {
             }
         )
     }
+    private fun toggleContinuousCapture() {
+        isContinuousCapturing = !isContinuousCapturing
+        if (isContinuousCapturing) {
+            Toast.makeText(this, "Continuous Capture Started", Toast.LENGTH_SHORT).show()
+            startContinuousCapture()
+        } else {
+            Toast.makeText(this, "Continuous Capture Stopped", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun captureVideo() {}
 
@@ -131,6 +143,7 @@ class MainActivity : AppCompatActivity() {
 
             imageCapture = ImageCapture.Builder().build()
 
+
             // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
@@ -148,6 +161,14 @@ class MainActivity : AppCompatActivity() {
 
         }, ContextCompat.getMainExecutor(this))
     }
+    private fun startContinuousCapture() {
+        if (isContinuousCapturing) {
+            takePhoto()
+            // 1초에 한 번 사진을 찍도록 설정 (1000 밀리초)
+            viewBinding.viewFinder.postDelayed({ startContinuousCapture() }, 1000)
+        }
+    }
+
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
