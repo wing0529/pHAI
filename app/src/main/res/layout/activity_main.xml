@@ -36,6 +36,17 @@
         android:text="@string/start_capture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/vertical_centerline" />
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textColor="@android:color/white"
+        android:layout_above="@id/continuousCaptureButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="8"
+        tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vertical_centerline"
