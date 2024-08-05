@@ -22,6 +22,11 @@ import java.util.concurrent.Executors
 
 import androidx.camera.view.PreviewView
 
+import android.os.Handler
+import android.os.Looper
+import android.widget.TextView
+
+
 
 typealias LumaListener = (luma: Double) -> Unit
 
@@ -37,10 +42,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
 
+    private val handler = Handler(Looper.getMainLooper())
+    private lateinit var timerTextView: TextView
+    private var countdownTime = 8
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
+        timerTextView = findViewById(R.id.timerTextView)
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -117,10 +128,23 @@ class MainActivity : AppCompatActivity() {
     private fun toggleContinuousCapture() {
         isContinuousCapturing = !isContinuousCapturing
         if (isContinuousCapturing) {
+            countdownTime = 8
+            updateTimer()
             Toast.makeText(this, "Continuous Capture Started", Toast.LENGTH_SHORT).show()
-            startContinuousCapture()
+            handler.postDelayed({startContinuousCapture()}, 8000)
         } else {
             Toast.makeText(this, "Continuous Capture Stopped", Toast.LENGTH_SHORT).show()
+            handler.removeCallbacksAndMessages(null)
+        }
+    }
+
+    private fun updateTimer() {
+        if (countdownTime > 0) {
+            timerTextView.text = countdownTime.toString()
+            countdownTime--
+            handler.postDelayed({ updateTimer() }, 1000)
+        } else {
+            timerTextView.text = ""
         }
     }
 
@@ -165,7 +189,7 @@ class MainActivity : AppCompatActivity() {
         if (isContinuousCapturing) {
             takePhoto()
             // 1초에 한 번 사진을 찍도록 설정 (1000 밀리초)
-            viewBinding.viewFinder.postDelayed({ startContinuousCapture() }, 1000)
+            handler.postDelayed({ startContinuousCapture() }, 1000)
         }
     }
 
@@ -178,6 +202,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+        handler.removeCallbacksAndMessages(null) // Clean up handler callbacks
     }
 
     companion object {
