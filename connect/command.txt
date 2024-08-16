@@ -1,0 +1,28 @@
+
+#streamlit + ngrok + pytorch + sklearn 
+#로컬 streamlit 서버 실행
+
+> cd connect
+> streamlit run app.py 
+
+# 원격 ngrok 서버 실행
+# ngrok 프로그램 실행 후 
+# ngrok는 2시간 후면 자동 서버 종료 됨 (무료 버전)
+
+> ngrok http 8501 
+
+-------------- 240718 김나래 -------------------
+
+현재 딥러닝 데모 모델, 머신러닝 참빛설계 모델
+
+앞으로
+
+1. DL, ML 튜닝 후 파일 바꿔서 집어넣기
+
+2. 안드로이드 스튜디오와 http 통신 
+- input 사진들 전송 받기 
+- 건강상태 반환해서 txt로
+
+3. python 코드 추가
+- 안드로이드스튜디오에서 전송받은 input 사진들 평균값 or 최빈값을 통해 1개의 값으로 만들어서 DL전에 집어넣기
+
