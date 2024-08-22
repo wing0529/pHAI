@@ -4,10 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cameraxx.databinding.ActivityMainBinding
 
 class Main : AppCompatActivity() {
+    private lateinit var viewBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(R.layout.main)
         val btnCause: Button = findViewById(R.id.btnCause)
         btnCause.setOnClickListener {
@@ -35,7 +40,7 @@ class Main : AppCompatActivity() {
 
         val btnAdd: Button = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener {
-            val intent = Intent(this, AddActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

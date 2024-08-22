@@ -33,10 +33,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".CauseActivity" />
-        <activity android:name=".AddActivity" />
         <activity android:name=".Prevention" />
         <activity android:name=".ProductsActivity" />
         <activity android:name=".SymptonsActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
