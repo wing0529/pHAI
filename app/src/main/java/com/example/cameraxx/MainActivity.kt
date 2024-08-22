@@ -67,11 +67,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(viewBinding.root)
 
         timerTextView = findViewById(R.id.timerTextView)
         viewBinding.uploadStatusTextView.text = "Ready to upload" // TextView 초기화
-
 
 
         // Request camera permissions
