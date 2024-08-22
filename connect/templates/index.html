@@ -3,41 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep White-Balance Editing</title>
+    <title>딥 화이트 밸런스 수정</title>
 </head>
 <body>
-    <h1>Deep White-Balance Editing</h1>
-    <form method="post" enctype="multipart/form-data">
-        <label for="model_dir">Model Directory:</label>
-        <input type="text" name="model_dir" value="./models"><br>
-
-        <label for="input_image">Upload an Image:</label>
-        <input type="file" name="input_image" accept="C:\\Users\\pc10\\vscode\\pHAI\\connect\\tmp\\uploads"><br>
-
-        <label for="output_dir">Output Directory:</label>
-        <input type="text" name="output_dir" value="./output"><br>
-
-        <label for="task">Task:</label>
-        <select name="task">
-            <option value="AWB">AWB</option>
-        </select><br>
-
-        <label for="max_size">Max Image Size:</label>
-        <input type="number" name="max_size" value="656"><br>
-
-        <label for="device_option">Device:</label>
-        <select name="device_option">
-            <option value="cpu">CPU</option>
-            <option value="mobile">Mobile</option>
-        </select><br>
-
-        <label for="show_output">Show Output:</label>
-        <input type="checkbox" name="show_output" checked><br>
-
-        <label for="save_output">Save Output:</label>
-        <input type="checkbox" name="save_output" checked><br>
-
-        <input type="submit" value="Submit">
-    </form>
+    <h1>딥 화이트 밸런스 수정</h1>
+    <p>이미지 파일이 업로드 되면 자동으로 처리됩니다. 결과를 보려면 <a href="{{ url_for('result') }}">결과 페이지</a>를 방문하세요.</p>
 </body>
 </html>
