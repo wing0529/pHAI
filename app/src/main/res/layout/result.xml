@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="역류성 식도염 수치 측정"
+        android:text="역류성 식도염 진단하기"
         android:fontFamily="@font/scdream5"
         android:textSize="30sp"
         android:textStyle="bold"
