@@ -2,6 +2,7 @@ package com.example.cameraxx
 
 import android.Manifest
 import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -27,6 +28,7 @@ import androidx.camera.view.PreviewView
 
 import android.os.Handler
 import android.os.Looper
+import android.widget.Button
 import android.widget.TextView
 import com.example.cameraxx.network.RetrofitClient
 
@@ -65,10 +67,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        setContentView(R.layout.activity_main)
 
         timerTextView = findViewById(R.id.timerTextView)
         viewBinding.uploadStatusTextView.text = "Ready to upload" // TextView 초기화
+
+
 
         // Request camera permissions
         if (allPermissionsGranted()) {

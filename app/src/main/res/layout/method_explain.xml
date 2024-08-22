@@ -8,23 +8,19 @@
     tools:context=".MainActivity">
 
     <!-- Back button -->
-
-
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="50dp"
-        android:contentDescription="뒤로 가기 버튼"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_back_arrow"
         android:scaleType="centerInside"
         android:padding="5dp"
+        android:contentDescription="뒤로 가기 버튼"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
-
-
 
     <!-- Title -->
     <TextView
@@ -64,7 +60,7 @@
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/subtitleTextView">
@@ -74,8 +70,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-
-
 
             <!-- Answer -->
             <TextView
@@ -110,5 +104,20 @@
                 android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
+
+    <!-- Start Button -->
+    <android.widget.Button
+        android:id="@+id/startButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="측정 시작"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
