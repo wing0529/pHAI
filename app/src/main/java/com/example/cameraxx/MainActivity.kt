@@ -3,6 +3,9 @@ package com.example.cameraxx
 import android.Manifest
 import android.content.ContentValues
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -25,7 +28,17 @@ import androidx.camera.view.PreviewView
 import android.os.Handler
 import android.os.Looper
 import android.widget.TextView
+import com.example.cameraxx.network.RetrofitClient
 
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
+import java.io.ByteArrayOutputStream
+import java.io.FileOutputStream
 
 
 typealias LumaListener = (luma: Double) -> Unit
@@ -44,7 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private lateinit var timerTextView: TextView
-    private var countdownTime = 8
+    private var countdownTime = 10
+    private var photoCount = 0 // 연속 촬영에서 찍힌 사진의 개수를 저장하는 변수
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         timerTextView = findViewById(R.id.timerTextView)
+        viewBinding.uploadStatusTextView.text = "Ready to upload" // TextView 초기화
 
         // Request camera permissions
         if (allPermissionsGranted()) {
@@ -85,53 +102,86 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
-        // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
 
-        // Create time stamped name and MediaStore entry.
-        val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-            .format(System.currentTimeMillis())
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
-            }
-        }
-
-        // Create output options object which contains file + metadata
-        val outputOptions = ImageCapture.OutputFileOptions
-            .Builder(contentResolver,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues)
-            .build()
-
-        // Set up image capture listener, which is triggered after photo has
-        // been taken
         imageCapture.takePicture(
-            outputOptions,
             ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+            object : ImageCapture.OnImageCapturedCallback() {
+                override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                    val bitmap = imageProxyToBitmap(imageProxy)
+                    imageProxy.close()
+                    uploadImage(bitmap)
                 }
 
-                override fun
-                        onImageSaved(output: ImageCapture.OutputFileResults){
-                    val msg = "Photo capture succeeded: ${output.savedUri}"
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, msg)
+                override fun onError(exception: ImageCaptureException) {
+                    Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
                 }
             }
         )
     }
+    private fun uploadImage(bitmap: Bitmap) {
+        // Bitmap을 File로 변환
+        val imageFile = File(filesDir, "photo.jpg")
+        val outputStream = FileOutputStream(imageFile)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        outputStream.flush()
+        outputStream.close()
+
+        // 서버로 파일 업로드
+        val requestBody = RequestBody.create("image/jpeg".toMediaTypeOrNull(), imageFile)
+        val body = MultipartBody.Part.createFormData("file", imageFile.name, requestBody)
+
+        val call = RetrofitClient.apiService.uploadImage(body)
+        viewBinding.uploadStatusTextView.text = "Uploading..."
+        call.enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    val resultText = "Upload successful!"
+                    Toast.makeText(this@MainActivity, resultText, Toast.LENGTH_LONG).show()
+                    viewBinding.uploadStatusTextView.text = resultText
+                } else {
+                    val errorText = "Upload failed: ${response.errorBody()?.string()}"
+                    Toast.makeText(this@MainActivity, errorText, Toast.LENGTH_LONG).show()
+                    viewBinding.uploadStatusTextView.text = errorText
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                val errorMessage = "Upload error: ${t.message}"
+                Toast.makeText(this@MainActivity, errorMessage, Toast.LENGTH_LONG).show()
+                viewBinding.uploadStatusTextView.text = errorMessage
+            }
+        })
+    }
+
+
+
+    private fun imageProxyToBitmap(imageProxy: ImageProxy): Bitmap {
+        val buffer = imageProxy.planes[0].buffer
+        val bytes = ByteArray(buffer.remaining())
+        buffer.get(bytes)
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    }
+
+    private fun getRealPathFromURI(uri: Uri): String {
+        var result = ""
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        if (cursor != null && cursor.moveToFirst()) {
+            val index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            result = cursor.getString(index)
+            cursor.close()
+        }
+        return result
+    }
+
     private fun toggleContinuousCapture() {
         isContinuousCapturing = !isContinuousCapturing
         if (isContinuousCapturing) {
-            countdownTime = 8
+            countdownTime = 10
+            photoCount = 0 // 카운트 초기화
             updateTimer()
             Toast.makeText(this, "Continuous Capture Started", Toast.LENGTH_SHORT).show()
-            handler.postDelayed({startContinuousCapture()}, 8000)
+            handler.postDelayed({startContinuousCapture()}, 10000)
         } else {
             Toast.makeText(this, "Continuous Capture Stopped", Toast.LENGTH_SHORT).show()
             handler.removeCallbacksAndMessages(null)
@@ -186,10 +236,13 @@ class MainActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
     private fun startContinuousCapture() {
-        if (isContinuousCapturing) {
+        if (isContinuousCapturing && photoCount < 10) { // 10장 이하일 때만 촬영
             takePhoto()
-            // 1초에 한 번 사진을 찍도록 설정 (1000 밀리초)
-            handler.postDelayed({ startContinuousCapture() }, 1000)
+            photoCount++
+            handler.postDelayed({ startContinuousCapture() }, 500)
+        } else {
+            isContinuousCapturing = false
+            Toast.makeText(this, "Continuous Capture Completed", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -202,21 +255,12 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
-        handler.removeCallbacksAndMessages(null) // Clean up handler callbacks
     }
 
     companion object {
         private const val TAG = "CameraXApp"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private val REQUIRED_PERMISSIONS =
-            mutableListOf (
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO
-            ).apply {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                    add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                }
-            }.toTypedArray()
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 }

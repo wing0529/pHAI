@@ -1,5 +1,4 @@
-<!-- res/drawable/rounded_button.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@android:color/white"/> <!-- 배경 색상 설정 -->
-    <corners android:radius="50dp"/> <!-- 반지름을 50%로 설정하여 동그랗게 만듦 -->
+    <corners android:radius="50dp" />
+    <solid android:color="@color/healthy_blue" />
 </shape>

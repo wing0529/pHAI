@@ -10,12 +10,14 @@
     <!-- Back button -->
     <ImageButton
         android:id="@+id/backButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
+        android:contentDescription="뒤로 가기 버튼"
         android:src="@drawable/ic_back_arrow"
+        android:scaleType="centerInside"
+        android:padding="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -28,8 +30,9 @@
         android:gravity="center"
         android:padding="16dp"
         android:text="증상 설명"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:fontFamily="@font/scdream5"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +46,9 @@
         android:gravity="center"
         android:padding="8dp"
         android:text="symptoms of reflux esophagitis"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
+        android:fontFamily="@font/scdream5"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTextView" />
@@ -71,10 +75,11 @@
             <TextView
                 android:id="@+id/questionTextView"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/scdream5"
                 android:layout_height="wrap_content"
                 android:text="Q. 역류성 식도염에 걸리면 나타나는 증상은 무엇이 있을까요?"
-                android:textColor="@color/healthy_blue"
-                android:textSize="18sp"
+                android:textColor="@color/dark_gray"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <!-- Answer 1 -->
@@ -82,30 +87,33 @@
                 android:id="@+id/answer1TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/scdream5"
                 android:layout_marginTop="16dp"
                 android:text="A. ① 가슴쓰림\n대개 명치끝에서 목구멍 쪽으로 치밀어 오르는 것처럼 흉골 뒤쪽 가슴이 타는 듯한 증상으로 보통 ‘가슴이 쓰리다, 화끈거린다’ 등으로 묘사한다. 이러한 통증은 견갑골 사이, 목, 팔 쪽으로도 뻗어갈 수 있다."
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <!-- Answer 2 -->
             <TextView
                 android:id="@+id/answer2TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/scdream5"
                 android:layout_marginTop="16dp"
                 android:text="② 위산 역류\n위산 역류는 위액이나 위 내용물이 인두로 역류하는 현상을 말한다. 환자는 시고 쓴맛이 느껴진다고 묘사한다. 많은 양의 음식을 섭취한 후나 누운 자세와 같이 위 내용물이 식도와 가까이 있을 때 쉽게 발생한다."
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <!-- Answer 3 -->
             <TextView
                 android:id="@+id/answer3TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/scdream5"
                 android:layout_marginTop="16dp"
                 android:text="③ 기타\n- 소화기에서도 증상들이 나타난다.\n- 만성적인 후두 증상, 인후 이물감, 기침, 쉰 목소리, 후두염, 만성 부비동염 등의 증상들도 발생한다.\n- 호흡기에서도 증상이 발생한다. 만성 기침 환자 중 5~7%는 그 원인이 위식도 역류 질환이라고 한다.\n- 가끔 충치가 발생하기도 한다."
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
 

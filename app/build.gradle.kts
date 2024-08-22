@@ -53,9 +53,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     //서버 라이브러리 추가
-    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("net.sourceforge.jtds:jtds:1.3.1")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.3") // 최신 버전으로 업데이트
+
+
 
     //xml 카드뷰 실행
     implementation ("androidx.cardview:cardview:1.0.0")
