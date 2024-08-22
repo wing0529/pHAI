@@ -111,17 +111,12 @@ if input_image is not None:
 
         # Save and show output
         if save_output:
-<<<<<<< HEAD
             if not os.path.exists(output_dir):
-=======
-            if not os.path.exists(output_dir)):
->>>>>>> 69fd3d2e6579f154a0094f7d1edfef1947126296
                 os.makedirs(output_dir)
             result_path = os.path.join(output_dir, name + '_AWB.png')
             out_awb_image.save(result_path)
             st.success(f'Image saved to {result_path}')
 
-<<<<<<< HEAD
         if show_output:
             st.image(out_awb_image, caption='Processed Image', use_column_width=True)
 
@@ -134,51 +129,15 @@ if input_image is not None:
         if svm_model and rbs:
             # Scale the RGB values and predict
             new_data = pd.DataFrame({'R': [R], 'G': [G], 'B': [B]})
-=======
-            if show_output:
-                st.image(out_awb_image, caption='Processed Image', use_column_width=True)
-
-            # Extract RGB and make a prediction
-            rgb = extract_central_rgb(out_awb_image)
-            R, G, B = rgb
-
-            # Load the SVM model and scaler
-            svm_model, rbs = load_model_and_scaler()
-            if svm_model and rbs:
-            # Scale the RGB values and predict
-                new_data = pd.DataFrame({'R': [R], 'G': [G], 'B': [B]})
->>>>>>> 69fd3d2e6579f154a0094f7d1edfef1947126296
             new_data_robust = rbs.transform(new_data)
             prediction = svm_model.predict(new_data_robust)
 
-            # Display the prediction
-            st.write("Prediction result (judge):", prediction[0])
-
-            # Save prediction to a JSON file (only prediction value)
-            result_json = {
-<<<<<<< HEAD
-                "prediction": prediction[0]
-            }
-            json_path = os.path.join(output_dir, 'result.json')
-
-            with open(json_path, 'w') as json_file:
-                json.dump(result_json, json_file)
-                st.success(f'Result saved to {json_path}')
+            # JSON 응답 반환 (예측 결과를 JSON으로 직접 반환)
+            st.json({"prediction": prediction[0]})
+        else:
+            st.error("Error in loading SVM model or making prediction.")
     else:
         st.error("Wrong task! Task should be: 'AWB'")
+
 else:
     st.info("Please upload an image.")
-
-=======
-            "prediction": prediction[0]
-        }
-        json_path = os.path.join(output_dir, name + '_result.json')
-        with open(json_path, 'w') as json_file:
-            json.dump(result_json, json_file)
-        st.success(f'Result saved to {json_path}')
-        else:
-        st.error("Wrong task! Task should be: 'AWB'")
-
-        else:
-        st.info("Please upload an image.")
->>>>>>> 69fd3d2e6579f154a0094f7d1edfef1947126296
