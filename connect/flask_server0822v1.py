@@ -14,10 +14,13 @@ import numpy as np
 import json
 import logging
 
-app = Flask(__name__)
+from flask import Flask
+from flask_cors import CORS
 
+app = Flask(__name__)
+CORS(app)
 # Configuration
-UPLOAD_FOLDER = '/tmp/uploads'
+UPLOAD_FOLDER = './tmp/uploads'
 MODEL_DIR = './models'
 OUTPUT_DIR = './output'
 STATIC_FOLDER = 'static'

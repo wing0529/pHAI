@@ -33,4 +33,5 @@
 
 set FLASK_APP=실행하는 파일 이름
 flask run
+echo %FLASK_APP%
 

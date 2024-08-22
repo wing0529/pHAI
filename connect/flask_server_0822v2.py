@@ -13,11 +13,14 @@ import pandas as pd
 import joblib
 import numpy as np
 import json
+from flask import Flask
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Configuration
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = '/tmp/uploads'
 MODEL_DIR = './models'
 OUTPUT_DIR = './output'
 STATIC_FOLDER = 'static'
@@ -162,5 +165,5 @@ def result():
         return jsonify({"error": "Result file not found"}), 404
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=5000)
-    #app.run(debug=True)
+    #app.run(host='0.0.0.0',port=5000)
+    app.run(debug=True)
