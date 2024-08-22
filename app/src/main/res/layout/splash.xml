@@ -3,53 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/healthy_green">
+    android:background="#D3D4CE">
 
-    <!-- 어플 로고 이미지 -->
+    <!-- 어플 이름 텍스트 (kwLogo) -->
+    <ImageView
+        android:id="@+id/appNameTextView"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:src="@drawable/kwLogo"
+        app:layout_constraintBottom_toTopOf="@+id/logoImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <!-- 어플 로고 이미지 (phaiImg2) -->
     <ImageView
         android:id="@+id/logoImageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/app_logo"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/phaiImg2"
         android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/appNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/appNameTextView"
+        app:layout_constraintBottom_toTopOf="@id/taglineTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.3"/>
-
-    <!-- 어플 이름 텍스트 -->
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <!-- 설명 텍스트 -->
-    <TextView
-        android:id="@+id/appNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="18dp"
-        android:text="Throat Care +"
-        android:textColor="@color/white"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"
-        app:layout_constraintVertical_bias="0.4" />
-
     <TextView
         android:id="@+id/taglineTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="우리의 안전한 목건강을 위해"
+        android:text="\@Kwangwoon University"
         android:textSize="16sp"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_gray"
+        android:textStyle="bold"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/appNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.5"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

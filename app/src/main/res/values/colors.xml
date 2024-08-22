@@ -6,7 +6,8 @@
     <color name="healthy_green">#a8c2c9</color> <!-- 건강한 느낌의 초록색 -->
 
     <!-- 추가 색상 -->
-    <color name="healthy_blue">#a8c2c9</color> <!-- 건강한 느낌의 파란색 -->
+    <color name="healthy_blue">#D3D4CE</color> <!-- 건강한 느낌의 파란색 -->
+    <!--  <color name="healthy_blue">#a8c2c9</color> 건강한 느낌의 파란색 -->
     <color name="light_gray">#FFD3D3D3</color> <!-- 연한 회색 -->
     <color name="dark_gray">#FF555555</color> <!-- 어두운 회색 -->
     <color name="light_blue">#FF87CEFA</color> <!-- 연한 파란색 -->
