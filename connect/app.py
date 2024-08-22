@@ -1,4 +1,4 @@
-import streamlit as st
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import torch
 import os
 from PIL import Image
@@ -11,24 +11,11 @@ import pandas as pd
 from sklearn.preprocessing import RobustScaler
 import joblib
 import numpy as np
+import json
 
-# Streamlit app title and description
-st.title('Deep White-Balance Editing')
-st.write('This application changes the white balance of an input image using a deep learning model and predicts health status based on RGB values.')
+app = Flask(__name__)
 
-# Streamlit sidebar for user input
-st.sidebar.title('Options')
-
-model_dir = st.sidebar.text_input('Model Directory', './models')
-input_image = st.sidebar.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
-output_dir = st.sidebar.text_input('Output Directory', './output')
-task = st.sidebar.selectbox('Task', ['AWB'])
-max_size = st.sidebar.slider('Max Image Size', 256, 1024, 656)
-device_option = st.sidebar.selectbox('Device', ['cuda', 'cpu','mobile'])
-show_output = st.sidebar.checkbox('Show Output', True)
-save_output = st.sidebar.checkbox('Save Output', True)
-
-
+# Function to load the SVM model and scaler
 def load_model_and_scaler():
     try:
         rbs = RobustScaler()
@@ -37,9 +24,10 @@ def load_model_and_scaler():
         svm_model = joblib.load('best_svm.joblib')
         return svm_model, rbs
     except FileNotFoundError as e:
-        st.error(f"Error loading model or scaler: {e}")
+        print(f"Error loading model or scaler: {e}")
         return None, None
 
+# Function to convert a numpy array to a PIL image
 def convert_to_image(array):
     if isinstance(array, np.ndarray):
         if array.dtype != np.uint8:
@@ -48,87 +36,120 @@ def convert_to_image(array):
     else:
         raise TypeError("Provided object is not a numpy array")
 
+# Function to extract the central RGB value from an image
 def extract_central_rgb(image):
     if not isinstance(image, Image.Image):
         raise TypeError("Provided object is not a PIL.Image")
-            
+
     width, height = image.size
     center_x = width // 2
     center_y = height // 2
     central_pixel = image.getpixel((center_x, center_y))
-            
+
     return central_pixel
-        
-# Device setup
-device = torch.device('cuda' if device_option == 'cuda' and torch.cuda.is_available() else 'cpu')
-st.write(f'Using device: {device}')
 
-if input_image is not None:
-    # Load image
-    img = Image.open(input_image)
-    st.image(img, caption='Uploaded Image', use_column_width=True)
-    name = os.path.splitext(input_image.name)[0]
+# Flask route for the main page
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        model_dir = request.form.get('model_dir', './models')
+        output_dir = request.form.get('output_dir', './output')
+        task = request.form.get('task', 'AWB').lower()
+        max_size = int(request.form.get('max_size', 656))
+        device_option = request.form.get('device_option', 'cpu')
+        show_output = request.form.get('show_output', 'true') == 'true'
+        save_output = request.form.get('save_output', 'true') == 'true'
 
-    # Load model based on the selected task
-    if task.lower() == 'awb':
-        if os.path.exists(os.path.join(model_dir, 'net_awb.pth')):
-            # Load AWB net
-            net_awb = deep_wb_single_task.deepWBnet()
-            net_awb.to(device=device)
-            try:
-                net_awb.load_state_dict(torch.load(os.path.join(model_dir, 'net_awb.pth'), map_location=device), strict=False)
-            except RuntimeError as e:
-                st.error(f"Error loading model: {e}")
-                st.stop()
-            net_awb.eval()
-        elif os.path.exists(os.path.join(model_dir, 'net.pth')):
-            net = deep_wb_model.deepWBNet()
-            net.load_state_dict(torch.load(os.path.join(model_dir, 'net.pth')))
-            net_awb, _, _ = splitter.splitNetworks(net)
-            net_awb.to(device=device)
-            net_awb.eval()
-        else:
-            st.error('Model not found!')
-            st.stop()
+        device = torch.device('cuda' if device_option == 'cuda' and torch.cuda.is_available() else 'cpu')
+        print(f'Using device: {device}')
 
-        # Process image with the model
-        out_awb = deep_wb(img, task=task.lower(), net_awb=net_awb, device=device, s=max_size)
+        if 'input_image' not in request.files:
+            return "No file part", 400
 
-        # Convert to PIL.Image if necessary
-        if isinstance(out_awb, np.ndarray):
-            out_awb_image = convert_to_image(out_awb)
-        elif isinstance(out_awb, Image.Image):
-            out_awb_image = out_awb
-        else:
-            st.error("Unexpected output type from deep_wb function.")
-            st.stop()
+        file = request.files['input_image']
+        if file.filename == '':
+            return "No selected file", 400
 
-        # Save and show output
-        if save_output:
-            if not os.path.exists(output_dir):
-                os.makedirs(output_dir)
-            result_path = os.path.join(output_dir, name + '_AWB.png')
-            out_awb_image.save(result_path)
-            st.success(f'Image saved to {result_path}')
+        if file and allowed_file(file.filename):
+            # Load image
+            img = Image.open(file)
+            name = os.path.splitext(file.filename)[0]
 
-        if show_output:
-            st.image(out_awb_image, caption='Processed Image', use_column_width=True)
+            # Load model based on the selected task
+            if task == 'awb':
+                if os.path.exists(os.path.join(model_dir, 'net_awb.pth')):
+                    # Load AWB net
+                    net_awb = deep_wb_single_task.deepWBnet()
+                    net_awb.to(device=device)
+                    try:
+                        net_awb.load_state_dict(torch.load(os.path.join(model_dir, 'net_awb.pth'), map_location=device),
+                                                strict=False)
+                    except RuntimeError as e:
+                        return f"Error loading model: {e}", 500
+                    net_awb.eval()
+                elif os.path.exists(os.path.join(model_dir, 'net.pth')):
+                    net = deep_wb_model.deepWBNet()
+                    net.load_state_dict(torch.load(os.path.join(model_dir, 'net.pth')))
+                    net_awb, _, _ = splitter.splitNetworks(net)
+                    net_awb.to(device=device)
+                    net_awb.eval()
+                else:
+                    return "Model not found!", 500
 
-        rgb = extract_central_rgb(out_awb_image)
-        R, G, B = rgb
+                # Process image with the model
+                out_awb = deep_wb(img, task=task, net_awb=net_awb, device=device, s=max_size)
 
-        # Load the SVM model and scaler
-        svm_model, rbs = load_model_and_scaler()
-        if svm_model and rbs:
-            # Scale the RGB values and predict
-            new_data = pd.DataFrame({'R': [R], 'G': [G], 'B': [B]})
-            new_data_robust = rbs.transform(new_data)
-            prediction = svm_model.predict(new_data_robust)
-            
-            # Display the prediction
-            st.write("Prediction result (judge):", prediction[0])
-    else:
-        st.error("Wrong task! Task should be: 'AWB'")
+                # Convert to PIL.Image if necessary
+                if isinstance(out_awb, np.ndarray):
+                    out_awb_image = convert_to_image(out_awb)
+                elif isinstance(out_awb, Image.Image):
+                    out_awb_image = out_awb
+                else:
+                    return "Unexpected output type from deep_wb function.", 500
 
-else:
-    st.info("Please upload an image.")
+                # Save and show output
+                if save_output:
+                    if not os.path.exists('static'):
+                        os.makedirs('static')
+                    result_image_path = os.path.join('static', name + '_AWB.png')
+                    out_awb_image.save(result_image_path)
+
+                # Extract RGB and make a prediction
+                rgb = extract_central_rgb(out_awb_image)
+                R, G, B = rgb
+
+                # Load the SVM model and scaler
+                svm_model, rbs = load_model_and_scaler()
+                if svm_model and rbs:
+                    # Scale the RGB values and predict
+                    new_data = pd.DataFrame({'R': [R], 'G': [G], 'B': [B]})
+                    new_data_robust = rbs.transform(new_data)
+                    prediction = svm_model.predict(new_data_robust)
+
+                    # Save prediction to a JSON file
+                    result_json = {"prediction": prediction[0]}
+                    json_path = os.path.join('static', 'result.json')
+                    with open(json_path, 'w') as json_file:
+                        json.dump(result_json, json_file)
+
+                return render_template('result.html', image=url_for('static', filename=name + '_AWB.png'), prediction=prediction[0])
+
+            else:
+                return "Wrong task! Task should be: 'AWB'", 400
+    return render_template('index.html')
+
+# New route to return the prediction result in JSON format
+@app.route('/result', methods=['GET'])
+def result():
+    try:
+        with open('static/result.json', 'r') as json_file:
+            result_json = json.load(json_file)
+        return jsonify(result_json)
+    except FileNotFoundError:
+        return jsonify({"error": "Result file not found"}), 404
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'jpeg', 'png'}
+
+if __name__ == '__main__':
+    app.run(debug=True)
