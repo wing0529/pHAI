@@ -24,7 +24,7 @@
         android:networkSecurityConfig="@xml/connect"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Main"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Main" />
         <activity android:name=".CauseActivity" />
         <activity android:name=".Prevention" />
         <activity android:name=".ProductsActivity" />
