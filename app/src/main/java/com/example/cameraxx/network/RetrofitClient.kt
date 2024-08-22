@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import com.example.cameraxx.MainActivity
 
 object RetrofitClient {
-    private const val BASE_URL = "https://86d1-211-196-103-173.ngrok-free.app/"
+    private const val BASE_URL = "https://3842-211-196-103-173.ngrok-free.app/"
     private val client = OkHttpClient.Builder().build()
 
     val apiService: ApiService by lazy {
