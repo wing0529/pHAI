@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+    <title>처리 결과</title>
+    <style>
+        .scaled-image {
+            width: 10%; /* 이미지 크기를 원본 크기의 10%로 축소 */
+            height: auto; /* 비율 유지 */
+        }
+    </style>
+    <script>
+        // 페이지가 로드될 때마다 자동 새로 고침 설정
+        function autoRefresh() {
+            setTimeout(function() {
+                window.location.reload();
+            }, 5000); // 5000ms = 5초
+        }
+        window.onload = autoRefresh;
+    </script>
 </head>
 <body>
-    <h1>Processing Result</h1>
-    <h2>Prediction: {{ prediction }}</h2>
-    <a href="{{ url_for('index') }}">Go back</a>
+    <h1>처리 결과</h1>
+    <h2>예측: {{ prediction }}</h2>
+    <img src="{{ image }}" alt="처리된 이미지" class="scaled-image">
+    <br>
+    <a href="{{ url_for('index') }}">돌아가기</a>
 </body>
 </html>
