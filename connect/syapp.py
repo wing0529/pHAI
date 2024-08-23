@@ -64,6 +64,7 @@ def extract_central_rgb(image):
     center_y = height // 2
     return image.getpixel((center_x, center_y))
 
+'''
 @app.route('/', methods=['GET'])
 def index():
     # 미리 업로드된 이미지 경로 정의
@@ -114,6 +115,57 @@ def index():
         return render_template('result.html', image=url_for('output_file', filename=name + '_AWB.png'), prediction=prediction[0])
 
     return "유효하지 않은 작업입니다! 작업은 'AWB' 여야 합니다.", 400
+'''
+
+@app.route('/', methods=['GET'])
+def index():
+    # 미리 업로드된 이미지 경로 정의
+    input_image_path = os.path.join(app.config['UPLOAD_FOLDER'], 'photo.jpg')
+
+    img = Image.open(input_image_path)
+    name = os.path.splitext('photo.jpg')[0]
+
+    task = 'awb'  # 고정된 작업 값
+    device_option = 'cpu'  # 고정된 디바이스 옵션
+    save_output = True  # 고정된 출력 저장 옵션
+
+    device = torch.device('cuda' if device_option == 'cuda' and torch.cuda.is_available() else 'cpu')
+    logging.info(f'사용할 디바이스: {device}')
+
+    if task == 'awb':
+        net_awb = deep_wb_single_task.deepWBnet() if os.path.exists(os.path.join(app.config['MODEL_DIR'], 'net_awb.pth')) else deep_wb_model.deepWBNet()
+        net_awb.to(device)
+        net_awb.load_state_dict(torch.load(os.path.join(app.config['MODEL_DIR'], 'net_awb.pth'), map_location=device), strict=False)
+        net_awb.eval()
+
+        # 이미지 처리
+        out_awb = deep_wb(img, task=task, net_awb=net_awb, device=device)
+        out_awb_image = convert_to_image(out_awb) if isinstance(out_awb, np.ndarray) else out_awb
+
+        if save_output:
+            os.makedirs(app.config['OUTPUT_DIR'], exist_ok=True)
+            result_image_path = os.path.join(app.config['OUTPUT_DIR'], name + '_AWB.png')
+            out_awb_image.save(result_image_path)
+
+        rgb = extract_central_rgb(out_awb_image)
+        R, G, B = rgb
+
+        svm_model, rbs = load_model_and_scaler()
+        if svm_model and rbs:
+            new_data = pd.DataFrame({'R': [R], 'G': [G], 'B': [B]})
+            new_data_robust = rbs.transform(new_data)
+            prediction = svm_model.predict(new_data_robust)
+
+            result_json = {"prediction": prediction[0]}
+            json_path = os.path.join(app.config['STATIC_FOLDER'], 'result.json')
+            with open(json_path, 'w') as json_file:
+                json.dump(result_json, json_file)
+
+        return render_template('result.html', image=url_for('output_file', filename=name + '_AWB.png'), prediction=prediction[0])
+
+    return "유효하지 않은 작업입니다! 작업은 'AWB' 여야 합니다.", 400
+
+
 
 @app.route('/upload', methods=['POST'])
 def upload():
