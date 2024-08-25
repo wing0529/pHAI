@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF888888</color> <!-- 수정된 회색 -->
+    <color name="healthy_green">#a8c2c9</color> <!-- 건강한 느낌의 초록색 -->
+
+    <!-- 추가 색상 -->
+    <color name="healthy_blue">#a8c2c9</color> <!-- 건강한 느낌의 파란색 -->
+    <color name="light_gray">#FFD3D3D3</color> <!-- 연한 회색 -->
+    <color name="dark_gray">#FF555555</color> <!-- 어두운 회색 -->
+    <color name="light_blue">#FF87CEFA</color> <!-- 연한 파란색 -->
+    <color name="dark_blue">#FF4682B4</color> <!-- 어두운 파란색 -->
+    <color name="light_green">#FF98FB98</color> <!-- 연한 초록색 -->
+    <color name="dark_green">#FF006400</color> <!-- 어두운 초록색 -->
+    <color name="light_yellow">#B5B5B0</color> <!-- 연한 노란색 -->
+    <color name="dark_yellow">#FFFFD700</color> <!-- 어두운 노란색 -->
+    <color name="light_red">#FFFFA07A</color> <!-- 연한 빨간색 -->
+    <color name="dark_red">#FF8B0000</color> <!-- 어두운 빨간색 -->
+    <color name="light_purple">#FFDA70D6</color> <!-- 연한 보라색 -->
+    <color name="dark_purple">#FF800080</color> <!-- 어두운 보라색 -->
+    <color name="light_orange">#FFFFA500</color> <!-- 연한 주황색 -->
+    <color name="dark_orange">#FFFF4500</color> <!-- 어두운 주황색 -->
+</resources>

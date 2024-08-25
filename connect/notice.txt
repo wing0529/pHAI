@@ -1,0 +1,34 @@
+
+#streamlit + ngrok + pytorch + sklearn 
+
+#로컬 streamlit 서버 실행
+> cd connect
+> streamlit run app.py 
+
+# FLASK
+> cd connect
+> set FLASK_APP=(실행하고자 하는 파일 이름) 
+> flask run
+
+# 원격 ngrok 서버 실행
+# ngrok 프로그램 실행 후 
+# ngrok는 2시간 후면 자동 서버 종료 됨 (무료 버전)
+
+처음 설치 때
+> ngrok config add-authtoken 2kjMVajGfMv7eUFL6PPbr8UdKNd_2UY3NXB7DPiSDNna43Tk2 (한번 등록하면 바로 사용 가능)
+
+실행
+> ngrok http 8501or5000 
+
+-------------- 김나래 -------------------
+
+1. DL, ML 튜닝 후 파일 바꿔서 집어넣기
+    딥러닝 editing 6000k로 바꾸는 걸로 이식 완료 (240825)
+    머신러닝은 joblib파일만 바꿔주면 됨
+
+2. 안드로이드 스튜디오와 http 통신
+    input 사진들 전송 받기 - 10개말고 다른 개수로 업로드 될때 있음.. (240825) 
+    건강상태 반환해서 json로 - 완료 (240825)
+
+3. python 코드 추가
+- 안드로이드스튜디오에서 전송받은 input 사진들 평균값 or 최빈값을 통해 1개의 값으로 만들어서 DL전에 집어넣기 - 완료(240825)
