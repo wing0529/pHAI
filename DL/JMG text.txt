@@ -6,9 +6,8 @@ numpy 1.26.4
 나머지 버전은 상관 x
 -> requirements.txt 생성 완
 Demo
-
 python demo_single_image.py --input "c:/aproject/DEEP WHITE BALANCE/Deep_White_Balance/example_images/00.JPG" --output_dir "c:/aproject/DEEP WHITE BALANCE/Deep_White_Balance/result_images" --show
-
+ 
 트레이닝 
 
 set CUDA_VISIBLE_DEVICES=0

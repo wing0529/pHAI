@@ -9,7 +9,7 @@ __credits__ = ["Mahmoud Afifi"]
 
 from .deep_wb_blocks import *
 
-# 얘는 single(awb, s, t 3개가 아닌 하나만)
+
 class deepWBnet(nn.Module):
     def __init__(self):
         super(deepWBnet, self).__init__()

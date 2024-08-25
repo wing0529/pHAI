@@ -18,7 +18,6 @@ from utilities.deepWB import deep_wb
 import arch.splitNetworks as splitter
 from arch import deep_wb_single_task
 
-# 파일 하나만 돌리기
 
 def get_args():
     parser = argparse.ArgumentParser(description='Changing WB of an input image.')
@@ -29,8 +28,8 @@ def get_args():
     parser.add_argument('--output_dir', '-o', default='../result_images',
                         help='Directory to save the output images', dest='out_dir')
     parser.add_argument('--task', '-t', default='all',
-                        help="Specify the required task: 'AWB', 'editing', or 'all'.", dest='task')
-    parser.add_argument('--target_color_temp', '-tct', default=None, type=int,
+                        help="Specify the required task: 'AWB', 'editing', or 'all'.", dest='editing')
+    parser.add_argument('--target_color_temp', '-tct', default=6000, type=int,
                         help="Target color temperature [2850 - 7500]. If specified, the --task should be 'editing'",
                         dest='target_color_temp')
     parser.add_argument('--mxsize', '-S', default=656, type=int,
@@ -75,46 +74,7 @@ if __name__ == "__main__":
         if not os.path.exists(out_dir):
             os.mkdir(out_dir)
 
-    if args.task.lower() == 'all':
-        if os.path.exists(os.path.join(args.model_dir, 'net_awb.pth')) and \
-                os.path.exists(os.path.join(args.model_dir, 'net_t.pth')) and \
-                os.path.exists(os.path.join(args.model_dir, 'net_s.pth')):
-            # load awb net
-            net_awb = deep_wb_single_task.deepWBnet()
-            logging.info("Loading model {}".format(os.path.join(args.model_dir, 'net_awb.pth')))
-            net_awb.to(device=device)
-            net_awb.load_state_dict(torch.load(os.path.join(args.model_dir, 'net_awb.pth'),
-                                               map_location=device))
-            net_awb.eval()
-            # load tungsten net
-            net_t = deep_wb_single_task.deepWBnet()
-            logging.info("Loading model {}".format(os.path.join(args.model_dir, 'net_t.pth')))
-            net_t.to(device=device)
-            net_t.load_state_dict(
-                torch.load(os.path.join(args.model_dir, 'net_t.pth'), map_location=device))
-            net_t.eval()
-            # load shade net
-            net_s = deep_wb_single_task.deepWBnet()
-            logging.info("Loading model {}".format(os.path.join(args.model_dir, 'net_s.pth')))
-            net_s.to(device=device)
-            net_s.load_state_dict(
-                torch.load(os.path.join(args.model_dir, 'net_s.pth'), map_location=device))
-            net_s.eval()
-            logging.info("Models loaded !")
-        elif os.path.exists(os.path.join(args.model_dir, 'net.pth')):
-            net = deep_wb_model.deepWBNet()
-            logging.info("Loading model {}".format(os.path.join(args.model_dir, 'net.pth')))
-            net.load_state_dict(torch.load(os.path.join(args.model_dir, 'net.pth')))
-            net_awb, net_t, net_s = splitter.splitNetworks(net)
-            net_awb.to(device=device)
-            net_awb.eval()
-            net_t.to(device=device)
-            net_t.eval()
-            net_s.to(device=device)
-            net_s.eval()
-        else:
-            raise Exception('Model not found!')
-    elif args.task.lower() == 'editing':
+    if args.task.lower() == 'editing':
         if os.path.exists(os.path.join(args.model_dir, 'net_t.pth')) and \
                 os.path.exists(os.path.join(args.model_dir, 'net_s.pth')):
             # load tungsten net
@@ -144,26 +104,6 @@ if __name__ == "__main__":
             net_s.eval()
         else:
             raise Exception('Model not found!')
-    elif args.task.lower() == 'awb':
-        if os.path.exists(os.path.join(args.model_dir, 'net_awb.pth')):
-            # load awb net
-            net_awb = deep_wb_single_task.deepWBnet()
-            logging.info("Loading model {}".format(os.path.join(args.model_dir, 'net_awb.pth')))
-            logging.info(f'Using device {device}')
-            net_awb.to(device=device)
-            net_awb.load_state_dict(torch.load(os.path.join(args.model_dir, 'net_awb.pth'),
-                                               map_location=device))
-            net_awb.eval()
-        elif os.path.exists(os.path.join(args.model_dir, 'net.pth')):
-            net = deep_wb_model.deepWBNet()
-            logging.info("Loading model {}".format(os.path.join(args.model_dir, 'net.pth')))
-            logging.info(f'Using device {device}')
-            net.load_state_dict(torch.load(os.path.join(args.model_dir, 'net.pth')))
-            net_awb, _, _ = splitter.splitNetworks(net)
-            net_awb.to(device=device)
-            net_awb.eval()
-        else:
-            raise Exception('Model not found!')
     else:
         raise Exception("Wrong task! Task should be: 'AWB', 'editing', or 'all'")
 
@@ -171,39 +111,8 @@ logging.info("Processing image {} ...".format(fn))
 img = Image.open(fn)
 _, fname = os.path.split(fn)
 name, _ = os.path.splitext(fname)
-if args.task.lower() == 'all':  # awb and editing tasks
-    out_awb, out_t, out_s = deep_wb(img, task=args.task.lower(), net_awb=net_awb, net_s=net_s, net_t=net_t,
-                                    device=device, s=S)
-    out_f, out_d, out_c = utls.colorTempInterpolate(out_t, out_s)
-    if tosave:
-        result_awb = utls.to_image(out_awb)
-        result_t = utls.to_image(out_t)
-        result_s = utls.to_image(out_s)
-        result_f = utls.to_image(out_f)
-        result_d = utls.to_image(out_d)
-        result_c = utls.to_image(out_c)
-        result_awb.save(os.path.join(out_dir, name + '_AWB.png'))
-        result_s.save(os.path.join(out_dir, name + '_S.png'))
-        result_t.save(os.path.join(out_dir, name + '_T.png'))
-        result_f.save(os.path.join(out_dir, name + '_F.png'))
-        result_d.save(os.path.join(out_dir, name + '_D.png'))
-        result_c.save(os.path.join(out_dir, name + '_C.png'))
 
-    if args.show:
-        logging.info("Visualizing results for image: {}, close to continue ...".format(fn))
-        utls.imshow(img, result_awb, result_t, result_f, result_d, result_c, result_s)
-
-elif args.task.lower() == 'awb':  # awb task
-    out_awb = deep_wb(img, task=args.task.lower(), net_awb=net_awb, device=device, s=S)
-    if tosave:
-        result_awb = utls.to_image(out_awb)
-        result_awb.save(os.path.join(out_dir, name + '_AWB.png'))
-
-    if args.show:
-        logging.info("Visualizing result for image: {}, close to continue ...".format(fn))
-        utls.imshow(img, result_awb)
-
-else:  # editing
+if args.task.lower() == 'editing':  # editing
     out_t, out_s = deep_wb(img, task=args.task.lower(), net_s=net_s, net_t=net_t, device=device, s=S)
 
     if target_color_temp:

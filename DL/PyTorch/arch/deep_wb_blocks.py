@@ -10,7 +10,7 @@ __credits__ = ["Mahmoud Afifi"]
 import torch
 import torch.nn as nn
 
-# Conv 2번 -> 출력 크기는 입력이랑 같음
+
 class DoubleConvBlock(nn.Module):
     """double conv layers block"""
     def __init__(self, in_channels, out_channels):
@@ -25,7 +25,7 @@ class DoubleConvBlock(nn.Module):
     def forward(self, x):
         return self.double_conv(x)
 
-# Down sampling 포함
+
 class DownBlock(nn.Module):
     """Downscale block: maxpool -> double conv block"""
     def __init__(self, in_channels, out_channels):
@@ -38,7 +38,7 @@ class DownBlock(nn.Module):
     def forward(self, x):
         return self.maxpool_conv(x)
 
-# Bridge 전 단계
+
 class BridgeDown(nn.Module):
     """Downscale bottleneck block: maxpool -> conv"""
     def __init__(self, in_channels, out_channels):
@@ -52,8 +52,7 @@ class BridgeDown(nn.Module):
     def forward(self, x):
         return self.maxpool_conv(x)
 
-# 여기서부터 쭉 Up sampling
-# Transposed : 입력 2D를 늘려서 출력할 때 사용하는 Conv 방식
+
 class BridgeUP(nn.Module):
     """Downscale bottleneck block: conv -> transpose conv"""
     def __init__(self, in_channels, out_channels):
