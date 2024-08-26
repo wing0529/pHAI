@@ -29,29 +29,33 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             >
 
             <ProgressBar
                 android:id="@+id/ProgressBar"
-                android:layout_width="400dp"
-                android:layout_height="350dp"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginLeft="50dp"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:progressBackgroundTint="@android:color/darker_gray"
                 android:progressTint="@color/healthy_green"
-                android:theme="@style/Widget.AppCompat.ProgressBar" />
+                android:indeterminate="false"
+                style="@android:style/Widget.ProgressBar.Horizontal" />
 
             <!-- 수치 단계 텍스트 -->
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ProgressBar"
-                android:layout_marginTop="16dp"
                 android:layout_centerHorizontal="true"
-                android:text="상태: 보통"
-                android:fontFamily="@font/scdream5"
-                android:textSize="30sp"
-                android:textColor="@android:color/darker_gray" />
+                android:layout_below="@id/ProgressBar"
+                android:layout_marginBottom="50dp"
+                android:text="로딩중.."
+                android:textColor="@color/dark_gray"
+                android:textSize="70sp" />
 
         </RelativeLayout>
 

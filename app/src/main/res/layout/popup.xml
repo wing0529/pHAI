@@ -20,6 +20,7 @@
         android:id="@+id/dialogMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="최대한 움직이지 말고 사진을 찍으세요."
         android:textSize="16sp"
         android:layout_marginBottom="16dp"/>
