@@ -26,9 +26,9 @@ class ExplainActivity : AppCompatActivity() {
         }
         val startButton: Button = findViewById(R.id.startButton)
         startButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            showCustomPopup()
         }
+
     }
     private fun showCustomPopup() {
         // 커스텀 레이아웃을 인플레이트
@@ -45,15 +45,18 @@ class ExplainActivity : AppCompatActivity() {
         val button = dialogView.findViewById<Button>(R.id.dialogButton)
 
         // 다이얼로그 제목과 메시지 설정
-        titleTextView.text = "측정 방법 설명"
-        messageTextView.text = "여기에서 측정 방법을 설명합니다."
+        titleTextView.text = "주의사항"
+        messageTextView.text = "최대한 움직이지 말고 사진을 찍으세요."
 
         // 버튼 클릭 리스너 설정
         button.setOnClickListener {
             dialog.dismiss() // 다이얼로그 닫기
-        }
+        // MainActivity로 이동
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
-        // 다이얼로그 표시
-        dialog.show()
+    // 다이얼로그 표시
+    dialog.show()
     }
 }
