@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
-        android:text="역류성 식도염의 증상들"
+        android:text="symptoms of reflux esophagitis"
         android:fontFamily="@font/scdream5"
         android:textColor="@android:color/black"
         android:textSize="20sp"
