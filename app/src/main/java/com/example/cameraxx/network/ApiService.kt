@@ -8,7 +8,7 @@ import retrofit2.http.Part
 
 interface ApiService {
     @Multipart
-    @POST("/upload")  // Streamlit에서 정의한 업로드 경로
+    @POST("/upload")  // Flask 서버에서 정의한 업로드 경로
     fun uploadImage(@Part file: MultipartBody.Part): Call<String>
 }
 

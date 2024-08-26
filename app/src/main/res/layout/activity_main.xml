@@ -118,15 +118,14 @@
         android:id="@+id/timerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:textColor="@android:color/white"
-        android:layout_above="@id/continuousCaptureButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@id/transparentRectangle"
-        app:layout_constraintEnd_toEndOf="@id/verticalLine"
+        android:layout_marginBottom="-100dp"
         android:text="10"
-        tools:ignore="MissingConstraints" />
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/transparentRectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vertical_centerline"
