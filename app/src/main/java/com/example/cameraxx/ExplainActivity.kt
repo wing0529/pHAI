@@ -45,8 +45,8 @@ class ExplainActivity : AppCompatActivity() {
         val button = dialogView.findViewById<Button>(R.id.dialogButton)
 
         // 다이얼로그 제목과 메시지 설정
-        titleTextView.text = "주의사항"
-        messageTextView.text = "최대한 움직이지 말고 사진을 찍으세요."
+        titleTextView.text = "※ 주의사항 ※"
+        messageTextView.text = "최대한 움직이지 말고 사진을 찍으세요.\n고정시킨 후 촬영하면 정확도가 올라갑니다."
 
         // 버튼 클릭 리스너 설정
         button.setOnClickListener {

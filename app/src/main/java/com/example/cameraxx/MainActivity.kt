@@ -322,7 +322,7 @@ class MainActivity : AppCompatActivity() {
             handler.postDelayed({ startContinuousCapture() }, 500)
         } else {
             isContinuousCapturing = false
-            Toast.makeText(this, "Continuous Capture Completed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "사진촬영이 완료되었습니다. \n잠시만 기다려주세요.", Toast.LENGTH_SHORT).show()
 
             // 10장이 모두 촬영된 후 비트맵 변환 및 처리
             processCapturedBitmaps()

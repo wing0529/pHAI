@@ -95,7 +95,16 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/scdream5"
                 android:layout_marginBottom="4dp"
-                android:text="③ pH 시험지를 최대한 촬영 화면의 \n네모칸에 맞춰주세요.\n"
+                android:text="③ [연속촬영] 버튼을 누르면서 동시에 pH 시험지에 타액을 조금 떨어뜨려주세요\n"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/scdream5"
+                android:layout_marginBottom="4dp"
+                android:text="④ pH 시험지를 십자가의 중심과 직사각형 크기에 맞춰 카메라를 고정해주세요.\n"
                 android:textSize="20sp" />
 
             <TextView
@@ -104,7 +113,7 @@
                 android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/scdream5"
-                android:text="④ 오른쪽에 있는 [연속 촬영] 버튼을 눌러주세요.\n-> 10초 후 10장의 사진이 찍힙니다.\n"
+                android:text="⑤ 10초 후 중앙의 타이머가 1이 되었을 때 10장의 사진이 찍힙니다.\n"
                 android:textSize="20sp" />
 
             <TextView
@@ -113,18 +122,9 @@
                 android:textColor="@color/black"
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/scdream5"
-                android:text="⑤ 중앙의 타이머가 1이 되었을 때 촬영 화면의 십자가에 맞추어 채취한 타액을 스포이드로 소량 떨어뜨려주세요.\n"
+                android:text="⑥ 오른쪽 위의 촬영된 사진 수가 10장이 되면 기다려주세요. 잠시후 결과가 나옵니다. \n"
                 android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:textColor="@color/black"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/scdream5"
-                android:text="⑥ 오른쪽 위의 촬영된 사진 수가 10장이 되면 기다려주세요. 잠시후 결과가 나옵니다.\n"
-                android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
 
