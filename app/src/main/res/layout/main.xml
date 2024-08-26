@@ -19,6 +19,9 @@
         android:textSize="60sp"
         android:textStyle="bold"
         android:shadowColor="#000000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="6"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -116,12 +119,12 @@
     <!-- 추가 버튼 -->
     <android.widget.Button
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_background_white"
         android:padding="16dp"
         android:fontFamily="@font/scdream5"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:text="시작"
         android:textColor="@android:color/black"
         android:textSize="36sp"
