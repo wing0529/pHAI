@@ -95,7 +95,7 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/scdream5"
                 android:layout_marginBottom="4dp"
-                android:text="③ [연속촬영] 버튼을 누르면서 동시에 pH 시험지에 타액을 조금 떨어뜨려주세요\n"
+                android:text="③ [연속촬영] 버튼을 누르면서 동시에 pH 시험지에 타액을 조금 떨어뜨려주세요.\n"
                 android:textSize="20sp" />
 
             <TextView

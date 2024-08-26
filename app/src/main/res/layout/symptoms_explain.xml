@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/scdream5"
                 android:layout_marginTop="16dp"
-                android:text="A. ① 가슴쓰림\n대개 명치끝에서 목구멍 쪽으로 치밀어 오르는 것처럼 흉골 뒤쪽 가슴이 타는 듯한 증상으로 보통 ‘가슴이 쓰리다, 화끈거린다’ 등으로 묘사한다. 이러한 통증은 견갑골 사이, 목, 팔 쪽으로도 뻗어갈 수 있다."
+                android:text="A. ① 가슴쓰림\n대개 명치끝에서 목구멍 쪽으로 치밀어 오르는 것처럼 흉골 뒤쪽 가슴이 타는 듯한 증상으로 보통 ‘가슴이 쓰리다, 화끈거린다’ 등으로 묘사됩니다. 이러한 통증은 견갑골 사이, 목, 팔 쪽으로도 뻗어갈 수 있습니다."
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/scdream5"
                 android:layout_marginTop="16dp"
-                android:text="② 위산 역류\n위산 역류는 위액이나 위 내용물이 인두로 역류하는 현상을 말한다. 환자는 시고 쓴맛이 느껴진다고 묘사한다. 많은 양의 음식을 섭취한 후나 누운 자세와 같이 위 내용물이 식도와 가까이 있을 때 쉽게 발생한다."
+                android:text="② 위산 역류\n위산 역류는 위액이나 위 내용물이 인두로 역류하는 현상을 말합니다. 환자분들은 시고 쓴맛이 느껴진다고 묘사합니다. 많은 양의 음식을 섭취한 후나 누운 자세와 같이 위 내용물이 식도와 가까이 있을 때 쉽게 발생할 수 있습니다."
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/scdream5"
                 android:layout_marginTop="16dp"
-                android:text="③ 기타\n- 소화기에서도 증상들이 나타난다.\n- 만성적인 후두 증상, 인후 이물감, 기침, 쉰 목소리, 후두염, 만성 부비동염 등의 증상들도 발생한다.\n- 호흡기에서도 증상이 발생한다. 만성 기침 환자 중 5~7%는 그 원인이 위식도 역류 질환이라고 한다.\n- 가끔 충치가 발생하기도 한다."
+                android:text="③ 기타\n- 소화기에서도 다양한 증상이 나타날 수 있습니다.\n- 만성적인 후두 증상, 인후 이물감, 기침, 쉰 목소리, 후두염, 만성 부비동염 등의 증상들도 발생할 수 있습니다.\n- 호흡기에서도 증상이 나타날 수 있습니다. 만성 기침 환자 중 5~7%는 그 원인이 위식도 역류 질환이라고 합니다.\n- 가끔 충치가 발생하기도 합니다."
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
         </LinearLayout>
