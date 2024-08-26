@@ -129,20 +129,7 @@ def find_closest_image_to_mean(upload_folder, selected_folder):
     closest_image_name = images[closest_index][0]
     output_image_path = os.path.join(selected_folder, closest_image_name)
     
-    # selected에 뭐가 있으면 미리 지우기
-    if os.path.exists(selected_folder):
-        for filename in os.listdir(selected_folder):
-            file_path = os.path.join(selected_folder, filename)
-            try:
-                if os.path.isfile(file_path) or os.path.islink(file_path):
-                    os.remove(file_path)
-                    logging.info(f"Deleted file: {file_path}")
-                elif os.path.isdir(file_path):
-                    shutil.rmtree(file_path)
-                    logging.info(f"Deleted directory: {file_path}")
-            except Exception as e:
-                logging.error(f"Failed to delete {file_path}. Reason: {e}")
-                
+                    
     #selected에 저장
     try:
         Image.open(closest_image).save(output_image_path)
@@ -268,6 +255,20 @@ def index():
     result_json_path = os.path.join('static', 'result.json')
     if os.path.exists(result_json_path):
         os.remove(result_json_path)
+    # selected에 뭐가 있으면 미리 지우기
+    if os.path.exists(app.config['SELECTED_FOLDER']):
+        for filename in os.listdir(app.config['SELECTED_FOLDER']):
+            file_path = os.path.join(app.config['SELECTED_FOLDER'], filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.remove(file_path)
+                    logging.info(f"Deleted file: {file_path}")
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+                    logging.info(f"Deleted directory: {file_path}")
+            except Exception as e:
+                logging.error(f"Failed to delete {file_path}. Reason: {e}")
+
     #사진 10개 올라오고 진행
     wait_for_files(app.config['UPLOAD_FOLDER'], 10)
     # 파일 처리 스레드 시작
@@ -294,7 +295,7 @@ def upload_multiple():
             
         else:
             return jsonify({'error': 'Invalid file type'}), 400
-    return jsonify({'message': 'File uploaded successfully'}), 200    
+    return jsonify({'success'}), 200    
 
 @app.route('/result', methods=['GET'])
 def result():
