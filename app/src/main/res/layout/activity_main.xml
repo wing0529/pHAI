@@ -94,24 +94,36 @@
         app:layout_constraintEnd_toEndOf="parent" />
     <android.widget.Button
         android:id="@+id/image_capture_button"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="50dp"
-        android:elevation="2dp"
-        android:text="@string/take_photo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/rounded_background_white"
+        android:padding="16dp"
+        android:text="한장 촬영"
+        android:fontFamily="@font/scdream5"
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintEnd_toStartOf="@id/vertical_centerline" />
 
     <android.widget.Button
         android:id="@+id/continuousCaptureButton"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginStart="50dp"
-        android:elevation="2dp"
-        android:text="@string/start_capture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/rounded_background_white"
+        android:padding="16dp"
+        android:text="연속 촬영"
+        android:fontFamily="@font/scdream5"
+        android:textColor="@color/dark_gray"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/vertical_centerline" />
     <TextView
@@ -143,6 +155,21 @@
         android:textSize="16sp"
         android:layout_gravity="center_horizontal"
         tools:ignore="MissingConstraints" />
+
+    <!-- Photo Count TextView -->
+    <TextView
+        android:id="@+id/photoCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:text="현재 촬영된 사진: 0 장"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/transparentRectangle"
+        />
 
 
 

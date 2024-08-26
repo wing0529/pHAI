@@ -22,13 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         android:padding="24dp"
         >
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <ProgressBar
                 android:id="@+id/ProgressBar"
@@ -65,7 +66,7 @@
         android:layout_marginBottom="32dp"
         android:weightSum="2">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnRetake"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -79,7 +80,7 @@
             android:textSize="24sp"
             android:textStyle="bold"/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnHome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
