@@ -31,6 +31,7 @@ import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
 import com.example.cameraxx.network.RetrofitClient
+import com.google.gson.JsonObject
 
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -62,6 +63,8 @@ class MainActivity : AppCompatActivity() {
     private var countdownTime = 10
     private var photoCount = 0 // 연속 촬영에서 찍힌 사진의 개수를 저장하는 변수
 
+    private val capturedBitmaps = mutableListOf<Bitmap>() // 촬영된 비트맵을 저장할 리스트
+
     private lateinit var photoCountTextView: TextView
 
 
@@ -72,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         timerTextView = findViewById(R.id.timerTextView)
-        viewBinding.uploadStatusTextView.text = "Ready to upload" // TextView 초기화
 
         photoCountTextView = findViewById(R.id.photoCountTextView) // 추가된 텍스트뷰 초기화
 
@@ -86,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Set up the listeners for take photo and video capture buttons
-        viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
+
         viewBinding.continuousCaptureButton.setOnClickListener { toggleContinuousCapture() }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -108,12 +110,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun takePhoto() {
+    /*private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
 
         // Create time stamped name and MediaStore entry.
-        val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
+       val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
             .format(System.currentTimeMillis())
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
@@ -148,39 +150,85 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+    }*/
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+
+        imageCapture.takePicture(
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageCapturedCallback() {
+                override fun onCaptureSuccess(imageProxy: ImageProxy) {
+                    val bitmap = imageProxyToBitmap(imageProxy)
+                    imageProxy.close()
+                    capturedBitmaps.add(bitmap) // 비트맵 리스트에 추가
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
+                }
+            }
+        )
     }
 
-    private fun uploadImage(bitmap: Bitmap) {
-        // Bitmap을 File로 변환
-        val imageFile = File(filesDir, "photo.jpg")
-        val outputStream = FileOutputStream(imageFile)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        outputStream.flush()
-        outputStream.close()
+    private fun processCapturedBitmaps() {
+        // 비트맵을 파일로 변환 및 파일 리스트에 추가
+        val fileList = mutableListOf<File>()
+        for (i in capturedBitmaps.indices) {
+            val bitmap = capturedBitmaps[i]
+            val fileName = java.lang.String.format("photo%02d.jpg", i + 1)
+            val imageFile = File(filesDir, fileName)
+            val outputStream = FileOutputStream(imageFile)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream.flush()
+            outputStream.close()
 
-        // 서버로 파일 업로드
-        val requestBody = RequestBody.create("image/jpeg".toMediaTypeOrNull(), imageFile)
-        val body = MultipartBody.Part.createFormData("file", imageFile.name, requestBody)
+            fileList.add(imageFile)
+        }
 
-        val call = RetrofitClient.apiService.uploadImage(body)
-        viewBinding.uploadStatusTextView.text = "Uploading..."
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+        // 파일들을 서버로 업로드
+        uploadImages(fileList)
+        capturedBitmaps.clear() // 비트맵 리스트 초기화 (필요한 경우)
+    }
+
+    private fun uploadImages(files: MutableList<File>) {
+
+        // 파일들을 MultipartBody.Part로 변환
+        val multipartBodyList = files.map { file ->
+            val requestBody = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
+            MultipartBody.Part.createFormData("files", file.name, requestBody)
+        }.toMutableList()// map 결과를 MutableList로 변환
+
+
+        val call = RetrofitClient.apiService.uploadMultipleImages(multipartBodyList)
+        call.enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    val resultText = "Upload successful!"
+                    val jsonResponse = response.body()
+                    val resultText = jsonResponse?.get("success")?.asString ?: "Upload successful!"
+
+                    // 파일 초기화
+                    multipartBodyList.clear()  // 이 부분은 필요 없을 수 있음 (로컬에서 초기화 목적이라면)
+                    files.clear()  // 파일 리스트 초기화
+
+                    // ResultActivity 시작
+                    val intent = Intent(this@MainActivity, resultActivity::class.java)
+                    intent.putExtra("RESULT_TEXT", resultText)
+                    startActivity(intent)
+
                     Toast.makeText(this@MainActivity, resultText, Toast.LENGTH_LONG).show()
-                    viewBinding.uploadStatusTextView.text = resultText
+
+
                 } else {
                     val errorText = "Upload failed: ${response.errorBody()?.string()}"
                     Toast.makeText(this@MainActivity, errorText, Toast.LENGTH_LONG).show()
-                    viewBinding.uploadStatusTextView.text = errorText
+
                 }
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 val errorMessage = "Upload error: ${t.message}"
                 Toast.makeText(this@MainActivity, errorMessage, Toast.LENGTH_LONG).show()
-                viewBinding.uploadStatusTextView.text = errorMessage
+
             }
         })
     }
@@ -211,10 +259,10 @@ class MainActivity : AppCompatActivity() {
             countdownTime = 10
             photoCount = 0 // 카운트 초기화
             updateTimer()
-            Toast.makeText(this, "Continuous Capture Started", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "타이머 시작", Toast.LENGTH_SHORT).show()
             handler.postDelayed({startContinuousCapture()}, 10000)
         } else {
-            Toast.makeText(this, "Continuous Capture Stopped", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "타이머 중지", Toast.LENGTH_SHORT).show()
             handler.removeCallbacksAndMessages(null)
         }
     }
@@ -275,9 +323,12 @@ class MainActivity : AppCompatActivity() {
         } else {
             isContinuousCapturing = false
             Toast.makeText(this, "Continuous Capture Completed", Toast.LENGTH_SHORT).show()
+
+            // 10장이 모두 촬영된 후 비트맵 변환 및 처리
+            processCapturedBitmaps()
+
         }
     }
-
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(

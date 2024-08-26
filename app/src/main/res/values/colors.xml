@@ -14,6 +14,7 @@
     <color name="dark_blue">#FF4682B4</color> <!-- 어두운 파란색 -->
     <color name="light_green">#FF98FB98</color> <!-- 연한 초록색 -->
     <color name="dark_green">#FF006400</color> <!-- 어두운 초록색 -->
+    <color name="safe_green">#00CC33</color>
     <color name="light_yellow">#B5B5B0</color> <!-- 연한 노란색 -->
     <color name="dark_yellow">#FFFFD700</color> <!-- 어두운 노란색 -->
     <color name="light_red">#FFFFA07A</color> <!-- 연한 빨간색 -->
