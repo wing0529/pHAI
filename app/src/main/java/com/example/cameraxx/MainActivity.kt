@@ -62,6 +62,8 @@ class MainActivity : AppCompatActivity() {
     private var countdownTime = 10
     private var photoCount = 0 // 연속 촬영에서 찍힌 사진의 개수를 저장하는 변수
 
+    private lateinit var photoCountTextView: TextView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +73,8 @@ class MainActivity : AppCompatActivity() {
 
         timerTextView = findViewById(R.id.timerTextView)
         viewBinding.uploadStatusTextView.text = "Ready to upload" // TextView 초기화
+
+        photoCountTextView = findViewById(R.id.photoCountTextView) // 추가된 텍스트뷰 초기화
 
 
         // Request camera permissions
@@ -105,23 +109,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
+        // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
 
+        // Create time stamped name and MediaStore entry.
+        val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US)
+            .format(System.currentTimeMillis())
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+            }
+        }
+
+        // Create output options object which contains file + metadata
+        val outputOptions = ImageCapture.OutputFileOptions
+            .Builder(contentResolver,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues)
+            .build()
+
+        // Set up image capture listener, which is triggered after photo has
+        // been taken
         imageCapture.takePicture(
+            outputOptions,
             ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageCapturedCallback() {
-                override fun onCaptureSuccess(imageProxy: ImageProxy) {
-                    val bitmap = imageProxyToBitmap(imageProxy)
-                    imageProxy.close()
-                    uploadImage(bitmap)
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onError(exc: ImageCaptureException) {
+                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
 
-                override fun onError(exception: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exception.message}", exception)
+                override fun
+                        onImageSaved(output: ImageCapture.OutputFileResults){
+                    val msg = "Photo capture succeeded: ${output.savedUri}"
+                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, msg)
                 }
             }
         )
     }
+
     private fun uploadImage(bitmap: Bitmap) {
         // Bitmap을 File로 변환
         val imageFile = File(filesDir, "photo.jpg")
@@ -242,6 +270,7 @@ class MainActivity : AppCompatActivity() {
         if (isContinuousCapturing && photoCount < 10) { // 10장 이하일 때만 촬영
             takePhoto()
             photoCount++
+            photoCountTextView.text = "현재 촬영된 사진: $photoCount 장" // 사진 개수 업데이트
             handler.postDelayed({ startContinuousCapture() }, 500)
         } else {
             isContinuousCapturing = false

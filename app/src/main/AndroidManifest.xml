@@ -38,7 +38,8 @@
         <activity android:name=".ProductsActivity" />
         <activity android:name=".SymptonsActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".AddActivity" />
+        <activity android:name=".ExplainActivity" />
+        <activity android:name=".PopupActivity" />
     </application>
 
 </manifest>
