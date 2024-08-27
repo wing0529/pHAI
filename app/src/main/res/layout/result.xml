@@ -67,7 +67,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/ProgressBar"
                     android:layout_marginBottom="50dp"
-                    android:text="로딩중.."
+                    android:text="처리중.."
                     android:textColor="@color/dark_gray"
                     android:textSize="70sp" />
 
