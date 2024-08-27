@@ -69,26 +69,31 @@ class resultActivity : AppCompatActivity() {
                 progressBar.progress = 90
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, android.R.color.holo_red_dark)
+                findViewById<TextView>(R.id.tvStatus).text = "위험"
             }
             "safe" -> {
                 progressBar.progress = 30
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, R.color.safe_green)
+                findViewById<TextView>(R.id.tvStatus).text = "안심"
             }
             "error" -> {
                 progressBar.progress = 100
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+                findViewById<TextView>(R.id.tvStatus).text = "오류"
             }
             "warning" -> {
                 progressBar.progress = 60
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, android.R.color.holo_orange_light)
+                findViewById<TextView>(R.id.tvStatus).text = "주의"
             }
             else -> {
                 progressBar.progress = 0
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+                findViewById<TextView>(R.id.tvStatus).text = "알 수 없음"
             }
         }
     }
