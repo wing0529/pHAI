@@ -17,15 +17,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/black" />
 
-        <ImageView
-            android:id="@+id/resultImageView"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="495dp"
-            android:layout_marginStart="70dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/img"
-            />
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -43,6 +35,16 @@
                 android:background="@color/white"
                 android:layout_marginTop="-20dp"
                 >
+                <!--
+                <ImageView
+                    android:id="@+id/resultImageView"
+                    android:layout_width="250dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginStart="45dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img"
+                    />-->
 
                 <ProgressBar
                     android:id="@+id/ProgressBar"
