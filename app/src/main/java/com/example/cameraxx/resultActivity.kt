@@ -66,12 +66,12 @@ class resultActivity : AppCompatActivity() {
 
         when (result) {
             "danger" -> {
-                progressBar.progress = 100
+                progressBar.progress = 90
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, android.R.color.holo_red_dark)
             }
             "safe" -> {
-                progressBar.progress = 100
+                progressBar.progress = 30
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, R.color.safe_green)
             }
@@ -81,7 +81,7 @@ class resultActivity : AppCompatActivity() {
                     ContextCompat.getColorStateList(this, android.R.color.darker_gray)
             }
             "warning" -> {
-                progressBar.progress = 50
+                progressBar.progress = 60
                 progressBar.progressTintList =
                     ContextCompat.getColorStateList(this, android.R.color.holo_orange_light)
             }

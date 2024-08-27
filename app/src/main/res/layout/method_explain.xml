@@ -104,7 +104,7 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/scdream5"
                 android:layout_marginBottom="4dp"
-                android:text="④ pH 시험지를 십자가의 중심과 직사각형 크기에 맞춰 카메라를 고정해주세요.\n"
+                android:text="④ pH 시험지를 십자가의 중심과 직사각형 크기에 맞춰 카메라를 고정해주세요.\n\n-> 직사각형에 pH 시험지가 딱 맞지 않더라도 스포이드를 뿌린 자리와 십자가의 중앙은 꼭! 일치시켜주세요.\n"
                 android:textSize="20sp" />
 
             <TextView
@@ -124,6 +124,15 @@
                 android:fontFamily="@font/scdream5"
                 android:text="⑥ 오른쪽 위의 촬영된 사진 수가 10장이 되면 기다려주세요. 잠시후 결과가 나옵니다. \n"
                 android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/resultImageView"
+                android:layout_width="250dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="45dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img"
+                />
 
         </LinearLayout>
     </ScrollView>
