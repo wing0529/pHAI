@@ -46,16 +46,7 @@ logging.basicConfig(level=logging.INFO)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'jpeg', 'png', 'bmp'}
 
-def load_model_and_scaler():
-    try:
-        rbs = RobustScaler()
-        X_train = pd.read_csv('output_data_6000_sigma.csv')[['R', 'G', 'B']]
-        X_train_robust = rbs.fit_transform(X_train)
-        svm_model = joblib.load('0806_svm.joblib')
-        return svm_model, rbs
-    except FileNotFoundError as e:
-        logging.error(f"Error loading model or scaler: {e}")
-        return None, None
+
 
 def convert_to_image(array):
     if isinstance(array, np.ndarray):
@@ -93,6 +84,9 @@ def get_single_file(folder):
         return files[0]  # 첫 번째 파일 선택
     return None
 
+
+
+    
 def find_closest_image_to_mean(upload_folder, selected_folder):
     """Find and save the image with RGB values closest to the mean of all images."""
     images = []
@@ -238,11 +232,20 @@ def process_files():
     logging.info(f'R: {r}, G: {g}, B: {b}')
     
     # 역류성 식도염 진단
-    svm_model, rbs = load_model_and_scaler()
-    if svm_model and rbs:
+    def load_model_and_scaler():
+        try:
+            
+            svm_model = joblib.load('0806_svm.joblib')
+            return svm_model
+        except FileNotFoundError as e:
+            logging.error(f"Error loading model or scaler: {e}")
+            return None, None
+    
+    svm_model = load_model_and_scaler()
+    if svm_model:
         new_data = pd.DataFrame({'R': [r], 'G': [g], 'B': [b]})
-        new_data_robust = rbs.transform(new_data)
-        prediction = svm_model.predict(new_data_robust)
+        svm_model = joblib.load('0806_svm.joblib')
+        prediction = svm_model.predict(new_data)
         logging.info(f'역류성 식도염 진단 = {prediction[0]}')
         result_json = {"prediction": prediction[0]}
         json_path = os.path.join(app.config['STATIC_FOLDER'], 'result.json')
