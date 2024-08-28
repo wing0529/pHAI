@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/splash.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/splash.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/cause_explain.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/cause_explain.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/main.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/main.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/result.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/result.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/activity_main.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/connection.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/connection.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/method_prevent.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/method_prevent.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/managing_product.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/managing_product.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/popup.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/popup.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/symptoms_explain.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/symptoms_explain.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-mergeDebugResources-36:/layout/method_explain.xml",
+        "source": "com.example.cameraxx.app-main-39:/layout/method_explain.xml"
+    }
+]
