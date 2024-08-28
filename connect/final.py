@@ -243,7 +243,6 @@ def process_files():
     svm_model = load_model_and_scaler()
     if svm_model:
         new_data = pd.DataFrame({'R': [r], 'G': [g], 'B': [b]})
-        svm_model = joblib.load('0806_svm.joblib')
         prediction = svm_model.predict(new_data)
         logging.info(f'역류성 식도염 진단 = {prediction[0]}')
         result_json = {"prediction": prediction[0]}
