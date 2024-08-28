@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    private const val BASE_URL = "https://d817-39-120-245-59.ngrok-free.app" // 실제 Flask 서버 주소로 교체
+    private const val BASE_URL = "https://6855-121-169-156-196.ngrok-free.app" // 실제 Flask 서버 주소로 교체
 
     private val okHttpClient by lazy {
         OkHttpClient.Builder()
