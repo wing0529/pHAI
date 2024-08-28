@@ -1,0 +1,194 @@
+[
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_rounded_background.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/rounded_background.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/font_scdream5.otf.flat",
+        "source": "com.example.cameraxx.app-main-39:/font/scdream5.otf"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_method_explain.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/method_explain.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_popup.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/popup.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/xml_backup_rules.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-mdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/font_scdream4.otf.flat",
+        "source": "com.example.cameraxx.app-main-39:/font/scdream4.otf"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/xml_connect.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/xml/connect.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_symptoms_explain.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/symptoms_explain.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_splash.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/splash.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-hdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_dialog_background.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/dialog_background.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_method_prevent.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/method_prevent.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_app_logo.png.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/app_logo.png"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_rounded_button.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/rounded_button.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_connection.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/connection.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xxxhdpi/ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_rounded_background_white.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/rounded_background_white.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/font_font.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/font/font.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_managing_product.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/managing_product.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_phaiview.png.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/phaiview.png"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_cause_explain.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/cause_explain.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_rounded_background_main.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/rounded_background_main.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_rounded_corners.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/rounded_corners.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_splash_capture.png.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/splash_capture.png"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_background_gradient.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/background_gradient.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.cameraxx.app-main-39:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_activity_main.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_img.png.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/img.png"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_result.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/result.xml"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_ic_back_arrow.jpg.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/ic_back_arrow.jpg"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_logokw.png.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/logokw.png"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/drawable_what_is.png.flat",
+        "source": "com.example.cameraxx.app-main-39:/drawable/what_is.png"
+    },
+    {
+        "merged": "com.example.cameraxx.app-debug-37:/layout_main.xml.flat",
+        "source": "com.example.cameraxx.app-main-39:/layout/main.xml"
+    }
+]

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/healthy_blue"
+    tools:context=".MainActivity">
+
+    <!-- Back button -->
+
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_back_arrow"
+        android:contentDescription="뒤로 가기 버튼"
+        android:scaleType="centerInside"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:fontFamily="@font/scdream5"
+        android:text="예방법 설명"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/subtitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="How to prevent reflux esophagitis"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/scdream5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+    <!-- ScrollView containing the content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitleTextView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Question -->
+            <TextView
+                android:id="@+id/questionTextView"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/scdream5"
+                android:layout_height="wrap_content"
+                android:text="Q. 역류성 식도염을 예방하기 위해서는\n무엇을 해야 할까요?"
+                android:textColor="@color/dark_gray"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Answer -->
+            <TextView
+                android:id="@+id/answerTextView"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/scdream5"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="A. 위 식도 역류질환은 만성적인 질환이며, 치료를 중단하거나 약물의 용량을 감량하면 증상이 재발하는 경우가 많아 지속적인 치료와 관리가 필요합니다.\n\n① 식후에 바로 눕지 않도록 하며, 취침시간 전의 음식 섭취는 피하도록 합니다.\n\n② 음주는 취침 중에도 위산이 계속 분비되도록 하며, 위 내용물이 식도로 역류하기 쉬운 환경을 조장할 수 있으므로 술은 제한하는 것이 좋습니다.\n\n③ 흡연은 침 분비를 감소시키기 때문에 위식도 역류질환에 해로우므로 제한하는 것이 좋습니다."
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

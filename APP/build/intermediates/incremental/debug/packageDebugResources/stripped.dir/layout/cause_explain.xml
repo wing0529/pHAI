@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/healthy_blue"
+    tools:context=".MainActivity">
+
+    <!-- Back button -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="뒤로 가기 버튼"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_back_arrow"
+        android:scaleType="centerInside"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="원인 설명"
+        android:fontFamily="@font/scdream5"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backButton" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/subtitleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="the cause of reflux esophagitis"
+        android:fontFamily="@font/scdream5"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+    <!-- ScrollView containing the content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitleTextView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Question -->
+            <TextView
+                android:id="@+id/questionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Q. 역류성 식도염이 생기는 이유는 무엇인가요?\n"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/scdream5"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Answer 1 -->
+            <TextView
+                android:id="@+id/answer1TextView"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/scdream5"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="역류성 식도염은 위산이 식도로 역류하면서 발생하는 질환으로, 주로 식도 하부 괄약근의 기능 저하, 과도한 위산 분비, 비만, 임신, 식습관 등의 요인에 의해 발생합니다."
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <!-- Answer 2 -->
+            <TextView
+                android:id="@+id/answer2TextView"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/scdream5"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="특히 기름진 음식, 커피, 초콜릿, 알코올 등의 섭취가 역류성 식도염을 악화시킬 수 있습니다."
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <!-- Answer 3 -->
+            <TextView
+                android:id="@+id/answer3TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/scdream5"
+                android:layout_marginTop="16dp"
+                android:text="또한, 스트레스, 흡연, 불규칙한 생활 습관도 역류성 식도염의 원인이 될 수 있습니다."
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

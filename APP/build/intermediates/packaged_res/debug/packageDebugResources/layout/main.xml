@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray">
+
+    <!-- 상단바 -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/healthy_blue"
+        android:gravity="center"
+        android:fontFamily="@font/scdream5"
+        android:layout_marginTop="5dp"
+        android:text="p H A I"
+        android:textColor="@android:color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:shadowColor="#000000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 설명 이미지 -->
+    <ImageView
+        android:id="@+id/descriptionImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_corners"
+        android:scaleType="fitCenter"
+        android:src="@drawable/what_is"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintWidth_percent="1.0" />
+
+    <!-- 증상 설명 버튼 -->
+    <android.widget.Button
+        android:id="@+id/btnCause"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_background_white"
+        android:padding="0dp"
+        android:text="원인\n설명"
+        android:fontFamily="@font/scdream5"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnSymptoms"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionImageView"
+        app:layout_constraintWidth_percent="0.48" />
+
+    <android.widget.Button
+        android:id="@+id/btnSymptoms"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_background_white"
+        android:padding="0dp"
+        android:text="증상\n설명"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnCause"
+        app:layout_constraintTop_toBottomOf="@id/descriptionImageView"
+        android:fontFamily="@font/scdream5"
+        app:layout_constraintWidth_percent="0.48"
+        app:layout_constraintHeight_percent="0.18"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- 예방법 설명 버튼 -->
+    <android.widget.Button
+        android:id="@+id/btnPrevention"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_background_white"
+        android:padding="12dp"
+        android:text="예방법\n설명"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnProducts"
+        android:fontFamily="@font/scdream5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCause"
+        app:layout_constraintWidth_percent="0.48"
+        app:layout_constraintHeight_percent="0.18"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp" />
+
+    <!-- 관리 제품 버튼 -->
+    <android.widget.Button
+        android:id="@+id/btnProducts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_background_white"
+        android:padding="12dp"
+        android:text="관리\n제품"
+        android:textColor="@color/dark_gray"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnPrevention"
+        android:fontFamily="@font/scdream5"
+        app:layout_constraintTop_toBottomOf="@+id/btnSymptoms"
+        app:layout_constraintWidth_percent="0.48"
+        app:layout_constraintHeight_percent="0.18"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp" />
+
+    <!-- 추가 버튼 -->
+    <android.widget.Button
+        android:id="@+id/btnAdd"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background_white"
+        android:padding="16dp"
+        android:fontFamily="@font/scdream5"
+        android:layout_marginBottom="50dp"
+        android:text="시작"
+        android:textColor="@android:color/black"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

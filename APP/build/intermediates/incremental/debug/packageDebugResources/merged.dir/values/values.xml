@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="dark_blue">#FF4682B4</color>
+    <color name="dark_gray">#FF555555</color>
+    <color name="dark_green">#FF006400</color>
+    <color name="dark_orange">#FFFF4500</color>
+    <color name="dark_purple">#FF800080</color>
+    <color name="dark_red">#FF8B0000</color>
+    <color name="dark_yellow">#FFFFD700</color>
+    <color name="gray">#FF888888</color>
+    <color name="healthy_blue">#D3D4CE</color>
+    <color name="healthy_green">#a8c2c9</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <color name="light_blue">#FF87CEFA</color>
+    <color name="light_gray">#FFD3D3D3</color>
+    <color name="light_green">#FF98FB98</color>
+    <color name="light_orange">#FFFFA500</color>
+    <color name="light_purple">#FFDA70D6</color>
+    <color name="light_red">#FFFFA07A</color>
+    <color name="light_yellow">#B5B5B0</color>
+    <color name="safe_green">#00CC33</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">cameraxx</string>
+    <string name="back_button_description">뒤로가기</string>
+    <string name="start_capture">Start Capture</string>
+    <string name="stop_capture">Stop Capture</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="what_is">묭</string>
+    <style name="Base.Theme.Cameraxx" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.Cameraxx" parent="Base.Theme.Cameraxx"/>
+</resources>
